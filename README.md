@@ -1,8 +1,9 @@
 ### Antes de ejecutar la aplicación que necesita
 
--Instalar Docker
+- Instalar Docker
 
 ## Para ejecutar la aplicación escribe este comando en la consola:
+
 - docker-compose build && docker-compose up -d
 
 ## Importante: el puerto de la aplicación es el 14000 => http://127.0.0.1:14000
