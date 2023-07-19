@@ -5,6 +5,7 @@ namespace App\Http\Requests;
 use App\Enums\RoleEnum;
 use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 use Illuminate\Validation\Rules\In;
 
 class RegisterRequest extends FormRequest
@@ -18,7 +19,8 @@ class RegisterRequest extends FormRequest
             'password' => 'required|string|min:6',
             'typeOfStaff' => [
                 'required',
-                new In([RoleEnum::Participant->value, RoleEnum::Journalist->value])
+                new Enum(RoleEnum::class)
+                //new In([RoleEnum::Participant->value, RoleEnum::Journalist->value])
             ]
         ];
     }
