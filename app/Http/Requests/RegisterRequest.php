@@ -3,10 +3,9 @@
 namespace App\Http\Requests;
 
 use App\Enums\RoleEnum;
-use Auth;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rules\Enum;
-use Illuminate\Validation\Rules\In;
 
 class RegisterRequest extends FormRequest
 {
@@ -20,7 +19,6 @@ class RegisterRequest extends FormRequest
             'typeOfStaff' => [
                 'required',
                 new Enum(RoleEnum::class)
-                //new In([RoleEnum::Participant->value, RoleEnum::Journalist->value])
             ]
         ];
     }

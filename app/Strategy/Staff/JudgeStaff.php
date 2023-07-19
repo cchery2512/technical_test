@@ -14,7 +14,7 @@ class JudgeStaff implements StaffStrategy
     {
         $data = $request->validate([
             ...$request->rules(),
-            'judge_id_number' => 'required|numeric'
+            'judge_id_number' => 'required|numeric|unique:number_judges,judge_id_number'
         ]);
 
         $user = User::create($data);
