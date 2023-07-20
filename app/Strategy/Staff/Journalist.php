@@ -20,7 +20,7 @@ class Journalist implements StaffStrategy
             'company_name' => 'sometimes|unique:companies,name'
         ]);
 
-        if (!$data['company_id'] && !$data['company_name'])
+        if (!isset($data['company_id']) && !isset($data['company_name']))
             throw ValidationException::withMessages([
                 'staff' => ['The company not provided.'],
             ]);
@@ -28,9 +28,9 @@ class Journalist implements StaffStrategy
 
         $user = User::create($data);
 
-        if ($data['company_id']) {
+        if ($request->has('company_id')) {
             $user->companyJournalist()->create(['company_id' => $data['company_id']]);
-        } else if ($data['company_name']) {
+        } else if ($request->has('company_name')) {
             $company = Company::create(['name' => $data['company_name']]);
             $user->companyJournalist()->create(['company_id' => $company->id]);
         }
@@ -53,17 +53,17 @@ class Journalist implements StaffStrategy
             'company_name' => 'sometimes|unique:companies,name'
         ]);
 
-        if (!$data['company_id'] && !$data['company_name'])
+        if (!isset($data['company_id']) && !isset($data['company_name']))
             throw ValidationException::withMessages([
                 'staff' => ['The company not provided.'],
             ]);
 
         $user->update($data);
 
-        if ($data['company_id']) {
+        if ($request->has('company_id')) {
             $user->companyJournalist?->delete();
             $user->companyJournalist()->create(['company_id' => $data['company_id']]);
-        } else if ($data['company_name']) {
+        } else if ($request->has('company_name')) {
             $company = Company::create(['name' => $data['company_name']]);
             $user->companyJournalist?->delete();
             $user->companyJournalist()->create(['company_id' => $company->id]);
@@ -71,6 +71,5 @@ class Journalist implements StaffStrategy
 
         return $user->loadMissing('company');
     }
-
-
+    
 }

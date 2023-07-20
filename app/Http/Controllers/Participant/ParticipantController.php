@@ -21,6 +21,7 @@ class ParticipantController extends Controller
         return UserResource::collection(
             User::role(RoleEnum::Participant->value)
                 ->with(['date'])
+                ->totalResult()
                 ->paginate()
         );
     }

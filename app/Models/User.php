@@ -82,4 +82,9 @@ class User extends Authenticatable
             'company_id'
         );
     }
+
+    public function scopeTotalResult(Builder $query): Builder
+    {
+        return $query->withAvg('results','result');
+    }
 }

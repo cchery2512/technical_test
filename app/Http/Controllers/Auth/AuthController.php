@@ -8,7 +8,7 @@ use App\Http\Requests\PersonalRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserResource;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 use Facades\App\Strategy\Staff\Staff;
 
@@ -28,7 +28,7 @@ class AuthController extends Controller
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
-        $data = PersonalRequest::createFrom($request);
-        return new UserResource(Staff::create($data['typeOfStaff'], $data));
+        $request = PersonalRequest::createFrom($request);
+        return new UserResource(Staff::create($data['typeOfStaff'], $request));
     }
 }

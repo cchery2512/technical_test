@@ -1,25 +1,28 @@
-### Antes de ejecutar la aplicación que necesita
+### Before running the application you need
 
-- Instalar Docker
+- Install Docker
 
-## Para ejecutar la aplicación escribe este comando en la consola:
+## To run the application type this command in the console:
 
 - docker-compose build && docker-compose up -d
 
-## Importante: el puerto de la aplicación es el 14000 => http://127.0.0.1:14000
+## Important: the application port is 14000 => http://127.0.0.1:14000
 
-### Ejecute la APIS
+### Run the APIS
 
-- Para facilitar la ejecución de los endpoints de este proyecto facilito el link ************ que contiene una colección de POSTMAN en donde se encuentran dichos endpoints con la cual se pueden ayudar.
+- To facilitate the execution of the endpoints of this project I provide the link: https://drive.google.com/file/d/17KP-GFqpCfG1AVgUzHsySAZ85FpwTLsB/view?usp=sharing 
+- That contains a POSTMAN collection where these endpoints are found with which they can help.
 
-### Conexión a la base de datos fuera de docker (con puertos fijos)
+### Connection to the database outside of docker (with fixed ports)
 
-## Las credenciales son:
-- user:     root
-- pasword:  password
+## The credentials are:
+- user: root
+- password: password
 - database: main
-- host:     localhost
-- port:     3307
+- host: localhost
+- port: 3307
 
-## Nota:
-- Si tiene problemas con los permisos de conexión, puede agregar este parámetro en la URL de conexión: ?allowPublicKeyRetrieval=true&useSSL=false
+## Note:
+- If you have problems with connection permissions, you can add this parameter in the connection URL: ?allowPublicKeyRetrieval=true&useSSL=false
+
+- Once the container is created, wait a few seconds for the dockerized server to finish configuring... (migrations and seeders usually run after the container is created)

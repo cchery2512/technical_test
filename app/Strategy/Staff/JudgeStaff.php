@@ -6,6 +6,7 @@ use App\Enums\RoleEnum;
 use App\Http\Requests\PersonalRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Models\User;
+use Illuminate\Validation\Rule;
 
 class JudgeStaff implements StaffStrategy
 {
@@ -36,7 +37,11 @@ class JudgeStaff implements StaffStrategy
     {
         $data = $request->validate([
             ...$request->rules(),
-            'judge_id_number' => 'required|numeric'
+            'judge_id_number' => [
+                'required',
+                'numeric',
+                Rule::unique('number_judges')->ignore($user->numberJudge?->id)
+            ]
         ]);
 
         $user->update($data);

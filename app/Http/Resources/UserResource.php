@@ -26,7 +26,8 @@ class UserResource extends JsonResource
             'date' => new DateResource($this->whenLoaded('date')),
             'numberJudge' => new NumberJudgeResource($this->whenLoaded('numberJudge')),
             'results' => ParticipantResultResource::collection($this->whenLoaded('results')),
-            'roles' => RoleResource::collection($this->whenLoaded('roles'))
+            'roles' => RoleResource::collection($this->whenLoaded('roles')),
+            'result_total' => $this->whenHas('results_avg_result', fn() => round($this->results_avg_result, 2))
         ];
     }
 }
