@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('judge_id')->constrained('users', 'id');
             $table->foreignId('participant_id')->constrained('users', 'id');
+            $table->unique(['judge_id', 'participant_id']);
             $table->float('result');
             $table->softDeletes();
             $table->timestamps();
