@@ -10,7 +10,7 @@ use App\Http\Resources\LoginResource;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
-use Facades\App\Strategy\Staff\Staff;
+use Facades\App\Services\Staff\Staff;
 
 class AuthController extends Controller
 {

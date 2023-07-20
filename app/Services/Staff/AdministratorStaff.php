@@ -1,53 +1,49 @@
 <?php
 
-namespace App\Strategy\Staff;
+namespace App\Services\Staff;
 
 use App\Enums\RoleEnum;
 use App\Http\Requests\PersonalRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Models\User;
 
-class ParticipantStaff implements StaffStrategy
+class AdministratorStaff implements StaffStrategy
 {
 
-    /**
-     * @param PersonalRequest $request
-     * @return User
-     */
     public function create(PersonalRequest $request): User
     {
         $data = $request->validate([
             ...$request->rules(),
-            'date_birth' => 'required|date|before:today'
+            'date_starting_service' => 'sometimes|date|before:today'
         ]);
 
         $user = User::create($data);
         $user->date()->create([
-            'date' => $data['date_birth'],
-            'type_date' => 'date_birth'
+            'date' => $data['date_starting_service'] ?? now(),
+            'type_date' => 'date_starting_service'
         ]);
+        $user->assignRole(RoleEnum::Administrator->value);
 
-        $user->assignRole(RoleEnum::Participant->value);
-
-        return $user->load('date');
+        return $user->loadMissing('date');
     }
 
     public function show(User $user): User
     {
-        return $user->load('date');
+        return $user->loadMissing('date');
     }
 
     public function update(User $user, PersonalUpdateRequest $request): User
     {
         $data = $request->validate([
             ...$request->rules(),
-            'date_birth' => 'required|date|before:today'
+            'date_starting_service' => 'required|date|before:tomorrow'
         ]);
 
         $user->update($data);
 
-        if ($user->date) {
-            $user->date->date = $data['date_birth'];
+        if ($user->date)
+        {
+            $user->date->date = $data['date_starting_service'];
             $user->date->save();
         }
 

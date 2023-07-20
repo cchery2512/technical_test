@@ -7,7 +7,7 @@ use App\Http\Requests\PersonalRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Http\Resources\UserResource;
 use App\Models\User;
-use Facades\App\Strategy\Staff\Staff;
+use Facades\App\Services\Staff\Staff;
 
 class StaffController extends Controller
 {

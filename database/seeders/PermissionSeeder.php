@@ -28,7 +28,8 @@ class PermissionSeeder extends Seeder
 
         $resultPermission = [
           'result.index',
-          'result.store'
+          'result.store',
+          'result.update'
         ];
 
         $accountPermission = [

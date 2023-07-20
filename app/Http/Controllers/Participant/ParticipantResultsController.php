@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ParticipantResultRequest;
 use App\Http\Resources\ParticipantResultResource;
 use App\Models\ParticipantResult;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ParticipantResultsController extends Controller
 {
@@ -15,6 +15,7 @@ class ParticipantResultsController extends Controller
     {
         $this->middleware(['permission:result.index'])->only('index');
         $this->middleware(['permission:result.store'])->only('store');
+        $this->middleware(['permission:result.update'])->only('update');
     }
 
     public function index()
@@ -31,7 +32,7 @@ class ParticipantResultsController extends Controller
 
         $result = ParticipantResult::create([
             ...$data,
-            'judge_id' => \Auth::user()->id
+            'judge_id' => Auth::user()->id
         ]);
 
         return new ParticipantResultResource($result);
@@ -41,8 +42,15 @@ class ParticipantResultsController extends Controller
     {
     }
 
-    public function update(Request $request, ParticipantResult $participantResult)
+    public function update(ParticipantResultRequest $request, ParticipantResult $result)
     {
+        $data = $request->validated();
+
+        $result->update([
+            ...$data
+        ]);
+
+        return new ParticipantResultResource($result);
     }
 
     public function destroy(ParticipantResult $participantResult)

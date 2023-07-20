@@ -6,7 +6,7 @@ use App\Http\Requests\AccountUpdateRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Http\Resources\UserResource;
 use Auth;
-use Facades\App\Strategy\Staff\Staff;
+use Facades\App\Services\Staff\Staff;
 
 class AccountController extends Controller
 {

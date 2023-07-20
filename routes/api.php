@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('test', function(){
-    return "Hola MuNdO";
+    return "Hola MuNdO 123";
 });
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
@@ -27,8 +27,8 @@ Route::post('register', [AuthController::class, 'register']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'account'], function () {
-        Route::get('/', [AccountController::class, 'show'])->middleware('permission:account.show');
-        Route::post('/update', [AccountController::class, 'update'])->middleware('permission:account.update');;
+        //Route::get('/', [AccountController::class, 'show'])->middleware('permission:account.show');
+        Route::post('/update', [AccountController::class, 'update'])->middleware('permission:account.update');
     });
 
     Route::apiResource('staff', StaffController::class);

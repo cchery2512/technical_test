@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Strategy\Staff;
+namespace App\Services\Staff;
 
 use App\Http\Requests\PersonalRequest;
 use App\Http\Requests\PersonalUpdateRequest;
