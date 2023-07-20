@@ -27,7 +27,7 @@ Route::post('register', [AuthController::class, 'register']);
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'account'], function () {
-        //Route::get('/', [AccountController::class, 'show'])->middleware('permission:account.show');
+        Route::get('/', [AccountController::class, 'show'])->middleware('permission:account.show');
         Route::post('/update', [AccountController::class, 'update'])->middleware('permission:account.update');
     });
 

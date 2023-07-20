@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\AccountUpdateRequest;
 use App\Http\Requests\PersonalUpdateRequest;
 use App\Http\Resources\UserResource;
-use Auth;
+
 use Facades\App\Services\Staff\Staff;
+use Illuminate\Support\Facades\Auth;
 
 class AccountController extends Controller
 {
